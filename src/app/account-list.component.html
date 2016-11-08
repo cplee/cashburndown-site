@@ -1,14 +1,17 @@
-<md-card>
-  <md-card-subtitle>Accounts</md-card-subtitle>
-  <md-list>
-      <md-list-item *ngFor="let account of accounts">
-        <md-icon md-list-avatar *ngIf="account.type == 'credit'">credit_card</md-icon>
-        <md-icon md-list-avatar *ngIf="account.type == 'depository'">attach_money</md-icon>
-        <h3 md-line><b>{{account.institution_type}}</b></h3>
-        <p md-line>
-          <span *ngIf="account.subtype">{{account.subtype}}</span>
-          <span *ngIf="!account.subtype">{{account.type}}</span>
-        </p>
-      </md-list-item>
-  </md-list>
-</md-card>
+<md-toolbar>
+  <span>Accounts</span>
+  <button md-mini-fab style="margin-left: 50px" (click)="addAccount()">
+    <md-icon class="md-24">add</md-icon>
+  </button>
+</md-toolbar>
+<md-list>
+  <md-list-item *ngFor="let account of accounts">
+    <md-icon md-list-avatar *ngIf="account.type == 'credit'" style="color: orange">credit_card</md-icon>
+    <md-icon md-list-avatar *ngIf="account.type == 'depository'" style="color: green">attach_money</md-icon>
+    <h3 md-line><b>{{account.institution_type}}</b></h3>
+    <p md-line>
+      <span *ngIf="account.subtype">{{account.subtype}}</span>
+      <span *ngIf="!account.subtype">{{account.type}}</span>
+    </p>
+  </md-list-item>
+</md-list>
