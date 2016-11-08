@@ -6,7 +6,8 @@ import { LogoutComponent }       from './logout.component';
 import { AccountListComponent } from './account-list.component';
 import { AppRoutingModule }     from './app-routing.module';
 import { MaterialModule }       from '@angular/material';
-import {AccountsService} from "./accounts.service";
+import { AccountsService } from "./accounts.service";
+import { LoginGuard } from "./login-guard.service";
 
 
 
@@ -22,7 +23,10 @@ import {AccountsService} from "./accounts.service";
         LogoutComponent,
         AccountListComponent,
     ],
-    providers: [ AccountsService ],
+    providers: [
+      AccountsService,
+      LoginGuard
+    ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }
