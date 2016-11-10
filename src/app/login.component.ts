@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 
 
 import 'aws-sdk/dist/aws-sdk.min.js';
+import {ProgressService} from "./progress.service";
 declare var AWS:any;
 
 
@@ -16,6 +17,7 @@ export class LoginComponent {
 
     constructor(
         private router: Router,
+        private progress: ProgressService,
         private zone: NgZone) {
 
     }
@@ -43,6 +45,7 @@ export class LoginComponent {
     // Triggered after a user successfully logs in using the Google external
     // login provider.
     onGoogleLoginSuccess = (user) => {
+        this.progress.loading = true;
         this.zone.run(() => {
             var profile = user.getBasicProfile();
             var authResponse = user.getAuthResponse();

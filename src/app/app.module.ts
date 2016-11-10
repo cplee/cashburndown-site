@@ -8,6 +8,7 @@ import { AppRoutingModule }     from './app-routing.module';
 import { MaterialModule }       from '@angular/material';
 import { AccountsService } from "./accounts.service";
 import { LoginGuard } from "./login-guard.service";
+import {ProgressService} from "./progress.service";
 
 
 
@@ -25,6 +26,7 @@ import { LoginGuard } from "./login-guard.service";
     ],
     providers: [
       AccountsService,
+      ProgressService,
       LoginGuard
     ],
     bootstrap: [ AppComponent ]

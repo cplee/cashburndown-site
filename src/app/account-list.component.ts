@@ -1,18 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, ViewContainerRef, NgZone} from '@angular/core';
 import { AccountsService }    from './accounts.service';
+import {MdSnackBar, MdSnackBarConfig, AriaLivePoliteness} from '@angular/material';
 import { environment } from '../environments/environment';
+import {ProgressService} from "./progress.service";
 
 declare const Plaid:any;
 
 @Component({
     selector: 'account-list',
-    templateUrl: './account-list.component.html'
+    templateUrl: './account-list.component.html',
+    providers: [MdSnackBar]
 })
 export class AccountListComponent {
     accounts: any[];
     plaid: any;
 
-    constructor(private accountsService: AccountsService) {
+    constructor(
+      private accountsService: AccountsService,
+      private progress: ProgressService,
+      private snackBar: MdSnackBar,
+      private viewContainerRef: ViewContainerRef,
+      private zone: NgZone
+    ) {
       this.plaid = Plaid.create({
         env: environment.plaidEnv,
         clientName: environment.plaidClientName,
@@ -27,9 +36,18 @@ export class AccountListComponent {
     };
 
     getAccounts(): void {
+      this.progress.loading = true;
       this.accountsService
         .getAccounts()
-        .then(accounts => this.accounts = accounts);
+        .then(accounts => {
+          this.progress.loading = false;
+          this.accounts = accounts
+        })
+        .catch(e => {
+            this.progress.loading = false;
+            this.alertError(e);
+            return false;
+        });
     };
 
     addAccount(): void {
@@ -37,10 +55,21 @@ export class AccountListComponent {
     };
 
     addAccountSuccess(public_token, metadata): void {
-      console.log("add account success");
+      this.progress.loading = true;
       this.accountsService
         .createAccount(metadata)
-        .then(this.getAccounts.bind(this));
-    }
+        .then(this.getAccounts.bind(this))
+        .catch(e => {
+          this.zone.run(() => {
+            this.progress.loading = false;
+            this.alertError(e);
+          });
+        });
+    };
+
+    alertError(error): void {
+        let config = new MdSnackBarConfig(this.viewContainerRef);
+        this.snackBar.open(error, 'OK', config);
+    };
 
 }
