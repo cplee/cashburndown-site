@@ -1,5 +1,5 @@
 import { Injectable }    from '@angular/core';
-import { Account } from './account';
+import {Account, BurndownType} from './account';
 import { environment } from '../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
@@ -23,9 +23,17 @@ export class AccountsService {
 
     getAccounts(): Promise<Account[]> {
       return this.apigClient.invokeApi({}, '/accounts', 'GET').then(response => response.data);
-    }
+    };
 
     createAccount(token: any): Promise<any> {
       return this.apigClient.invokeApi({}, '/tokens', 'POST', {}, token);
-    }
+    };
+
+    setAccountBurndown(id: string, burndown: BurndownType): Promise<any> {
+        return this.apigClient.invokeApi({id:id}, '/accounts/{id}/burndown', 'PUT', {}, burndown);
+    };
+
+    deleteAccount(id: string): Promise<any> {
+      return this.apigClient.invokeApi({id:id}, '/accounts/{id}', 'DELETE');
+    };
 }

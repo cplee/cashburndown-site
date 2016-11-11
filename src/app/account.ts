@@ -1,3 +1,8 @@
+export enum BurndownType {
+  Year,
+  Month,
+  Paycheck
+}
 export class Account {
   id: string;
   item: string;
@@ -5,5 +10,5 @@ export class Account {
   type: string;
   subtype: string;
   institution_type: string;
-  burndown: string;
+  burndown: BurndownType;
 }
