@@ -8,10 +8,15 @@
   <md-list-item *ngFor="let account of accounts">
     <md-icon md-list-avatar *ngIf="account.type == 'credit'" style="color: orange">credit_card</md-icon>
     <md-icon md-list-avatar *ngIf="account.type == 'depository'" style="color: green">attach_money</md-icon>
-    <h3 md-line><b>{{account.institution_type}}</b></h3>
+    <h3 md-line>
+      <b *ngIf="account.meta.name">{{account.meta.name}}</b>
+      <span *ngIf="account.meta.official_name"> - {{account.meta.official_name}}</span>
+      <span *ngIf="account.meta.number"> ({{account.meta.number}})</span>
+    </h3>
     <p md-line>
-      <span *ngIf="account.subtype">{{account.subtype}}</span>
-      <span *ngIf="!account.subtype">{{account.type}}</span>
+      <b>{{account.institution_type}}</b>
+      <span *ngIf="account.subtype"> {{account.subtype}}</span>
+      <span *ngIf="!account.subtype"> {{account.type}}</span>
     </p>
   </md-list-item>
 </md-list>
