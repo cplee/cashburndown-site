@@ -5,5 +5,10 @@
   flex: 1 1 auto;
 }
 
-
+.app-action {
+  position: relative;
+  top: 30px;
+  left: -70px;
+  display: inline-block;
+}
 

@@ -3,7 +3,7 @@
   <account-add (onAccountAdded)="getAccounts()"></account-add>
 </md-toolbar>
 <md-list>
-  <md-list-item *ngFor="let account of accounts">
+  <md-list-item *ngFor="let account of accounts" (onFocus)="console.log('hey')">
     <md-icon md-list-avatar *ngIf="account.type == 'credit'" style="color: orange">credit_card</md-icon>
     <md-icon md-list-avatar *ngIf="account.type == 'depository'" style="color: green">attach_money</md-icon>
     <h3 md-line>

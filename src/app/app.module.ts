@@ -13,6 +13,7 @@ import { AccountsService } from "./accounts.service";
 import { LoginGuard } from "./login-guard.service";
 import {ProgressService} from "./progress.service";
 import {ProgressComponent} from "./progress.component";
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -20,6 +21,7 @@ import {ProgressComponent} from "./progress.component";
     imports: [
         BrowserModule,
         AppRoutingModule,
+        FormsModule,
         MaterialModule.forRoot()
     ],
     declarations: [

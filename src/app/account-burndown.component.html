@@ -1,6 +1,6 @@
-<md-radio-group (change)="updateAccount()"  [(value)]="burndown">
-  <md-radio-button *ngFor="let burndownType of burndownTypes" [value]="burndownType">
+<md-button-toggle-group  [(ngModel)]="burndown">
+  <md-button-toggle *ngFor="let burndownType of burndownTypes" [value]="burndownType" (click)="updateAccount(burndownType)">
     {{burndownType}}
-  </md-radio-button>
-</md-radio-group>
+  </md-button-toggle>
+</md-button-toggle-group>
 

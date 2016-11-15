@@ -23,14 +23,12 @@ export class AccountBurndownComponent {
       ];
     }
 
-    updateAccount(): void {
+    updateAccount(newBurndown): void {
       this.progress.loading = true;
-      console.log(this.id + '<->' + this.burndown);
-      /*
       this.accountsService
-        .setAccountBurndown(this.id, this.burndown)
-        .catch(e => this.progress.alertError(e));
-        */
+        .setAccountBurndown(this.id, newBurndown)
+        .then(() => this.progress.loading = false)
+        .catch(e => this.progress.alertError(e))
     };
 
 
