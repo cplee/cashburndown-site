@@ -1,5 +1,5 @@
 <md-toolbar color="primary">
-    <span>{{title}}</span>
+    <span routerLink="/burndown">{{title}}</span>
     <span class="fill-remaining-space"></span>
     <button md-icon-button [md-menu-trigger-for]="menu">
         <md-icon>more_vert</md-icon>
@@ -8,6 +8,7 @@
 <progress-bar></progress-bar>
 
 <md-menu #menu="mdMenu" x-position="before">
+    <button md-menu-item routerLink="/accounts"> Accounts </button>
     <button md-menu-item> Help </button>
     <logout></logout>
 </md-menu>

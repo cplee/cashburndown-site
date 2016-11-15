@@ -1,10 +1,10 @@
 import { Component, NgZone } from '@angular/core';
 import { Router }            from '@angular/router';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 
 import 'aws-sdk/dist/aws-sdk.min.js';
-import {ProgressService} from "./progress.service";
+import {ProgressService} from "../util/progress.service";
 declare var AWS:any;
 
 
@@ -63,9 +63,10 @@ export class LoginComponent {
                 }
             });
 
-            let router = this.router;
+            let comp = this;
             AWS.config.credentials.refresh(function(){
-                router.navigate(['/accounts'])
+                comp.progress.loading = false;
+                comp.router.navigate(['/burndown'])
             });
 
         });

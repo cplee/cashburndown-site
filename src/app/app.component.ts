@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ProgressService} from "./progress.service";
+import {ProgressService} from "./util/progress.service";
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -7,5 +7,4 @@ import {ProgressService} from "./progress.service";
 export class AppComponent {
     title = 'Cashburndown';
     constructor(private progress: ProgressService) {}
-
 }

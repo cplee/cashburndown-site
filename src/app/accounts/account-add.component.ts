@@ -1,7 +1,7 @@
 import {Component, Output, EventEmitter } from '@angular/core';
 import { AccountsService }    from './accounts.service';
-import { environment } from '../environments/environment';
-import {ProgressService} from "./progress.service";
+import { environment } from '../../environments/environment';
+import {ProgressService} from "../util/progress.service";
 
 declare const Plaid:any;
 

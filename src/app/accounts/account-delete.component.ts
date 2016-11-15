@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter } from '@angular/core';
 import { AccountsService }    from './accounts.service';
-import {ProgressService} from "./progress.service";
+import {ProgressService} from "../util/progress.service";
 
 @Component({
     selector: 'account-delete',

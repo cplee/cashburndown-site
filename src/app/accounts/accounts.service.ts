@@ -1,6 +1,6 @@
 import { Injectable }    from '@angular/core';
 import {Account, BurndownType} from './account';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 

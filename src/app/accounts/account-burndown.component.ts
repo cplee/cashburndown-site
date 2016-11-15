@@ -1,6 +1,6 @@
 import {Component, Input } from '@angular/core';
 import { AccountsService }    from './accounts.service';
-import {ProgressService} from "./progress.service";
+import {ProgressService} from "../util/progress.service";
 import {BurndownType} from "./account";
 
 @Component({
