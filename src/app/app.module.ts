@@ -15,6 +15,7 @@ import {ProgressService} from "./util/progress.service";
 import {ProgressComponent} from "./util/progress.component";
 import {FormsModule} from '@angular/forms';
 import {BurndownComponent} from "./burndown/burndown.component";
+import {BurndownService} from "./burndown/burndown.service";
 
 
 
@@ -39,6 +40,7 @@ import {BurndownComponent} from "./burndown/burndown.component";
     providers: [
       {provide: ErrorHandler, useClass: ProgressService},
       AccountsService,
+      BurndownService,
       ProgressService,
       LoginGuard
     ],

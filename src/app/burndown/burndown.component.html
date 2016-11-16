@@ -1,1 +1,15 @@
+<h3>{{burndown?.startDate | date:"yyyy-MM-dd"}} to {{burndown?.endDate | date:"yyyy-MM-dd"}}</h3>
+<md-list>
+  <md-list-item *ngFor="let tx of burndown?.actualTx">
+    <h3 md-line>
+      <span>{{ tx.date }}</span>
+    </h3>
+    <p md-line>
+      <b>{{tx.name}}</b> {{tx.amount}}
+    </p>
+  </md-list-item>
+</md-list>
 
+<pre>
+  {{burndown | json}}
+</pre>
