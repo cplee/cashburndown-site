@@ -16,6 +16,8 @@ import {ProgressComponent} from "./util/progress.component";
 import {FormsModule} from '@angular/forms';
 import {BurndownComponent} from "./burndown/burndown.component";
 import {BurndownService} from "./burndown/burndown.service";
+import { ChartModule } from 'angular2-highcharts';
+
 
 
 
@@ -24,7 +26,8 @@ import {BurndownService} from "./burndown/burndown.service";
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        MaterialModule.forRoot()
+        MaterialModule.forRoot(),
+        ChartModule
     ],
     declarations: [
         AppComponent,

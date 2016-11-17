@@ -15,6 +15,9 @@
     </button>
   </md-toolbar>
 </span>
+
+<chart [options]="options"></chart>
+
 <md-list>
   <md-list-item *ngFor="let tx of burndown?.actualTx">
     <h3 md-line>

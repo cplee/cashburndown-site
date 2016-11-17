@@ -13,6 +13,7 @@ export class BurndownComponent {
     type: BurndownType;
     asofdate: Date;
     burndownTypes: string[];
+    options: Object;
 
     constructor(
       private progress: ProgressService,
@@ -33,15 +34,26 @@ export class BurndownComponent {
 
     getBurndown(): void {
         this.progress.loading = true;
-        console.log(this.asofdate);
         this.burndownService
           .getBurndown(this.type, this.asofdate)
           .then(burndown => {
-            this.progress.loading = false;
             this.burndown = burndown;
+            this.updateChart();
+            this.progress.loading = false;
           })
           .catch(e => this.progress.alertError(e));
     };
+
+    updateChart(): void {
+        this.options = {
+          title : { text : null },
+          series: [{
+            type: 'line',
+            name: 'Actual',
+            data: this.getActualBalances()
+          }]
+        };
+    }
 
     previousBurndown(): void {
       this.asofdate = new Date(this.burndown.startDate);
@@ -54,5 +66,25 @@ export class BurndownComponent {
       this.asofdate.setDate(this.asofdate.getDate()+1);
       this.getBurndown();
     };
+
+    getActualBalances(): number[] {
+      let oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+      let daysInBurndown = 1 + Math.round(Math.abs((new Date(this.burndown.endDate).getTime() - new Date(this.burndown.startDate).getTime())/(oneDay)));
+      let initialBalances = Array(daysInBurndown).fill(0);
+
+      initialBalances[0] = this.burndown.startBalance;
+
+      return this.burndown.actualTx.reduce((balances, tx) => {
+        let dayNumber = Math.round(Math.abs((new Date(tx.date).getTime() - new Date(this.burndown.startDate).getTime())/(oneDay)));
+
+        return balances.map((val,index) => {
+          if(index >= dayNumber) {
+            return val - tx.amount
+          } else {
+            return val;
+          }
+        });
+      },initialBalances);
+    }
 
 }
