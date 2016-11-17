@@ -24,7 +24,7 @@ export class BurndownService {
 
     getBurndown(burndownType: BurndownType, asofdate: Date): Promise<Burndown> {
       return this.apigClient.invokeApi({burndownType:BurndownType[burndownType]}, '/burndowns/{burndownType}', 'GET', {
-        queryParams: { asofdate: asofdate.toISOString() }
+        queryParams: { asofdate: asofdate.toISOString().substring(0,10) }
       }).then(response => response.data);
     };
 }

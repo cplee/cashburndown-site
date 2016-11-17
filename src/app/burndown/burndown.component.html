@@ -1,5 +1,20 @@
-<h3 *ngIf="!burndown">Loading...</h3>
-<h3 *ngIf="burndown">{{burndown?.startDate | date:"yyyy-MM-dd"}} to {{burndown?.endDate | date:"yyyy-MM-dd"}}</h3>
+<md-tab-group [(selectedIndex)]="type" (selectChange)="getBurndown()">
+  <md-tab *ngFor="let burndownType of burndownTypes">
+    <template md-tab-label>{{ burndownType }}</template>
+  </md-tab>
+</md-tab-group>
+<span>
+  <span *ngIf="!burndown">Loading...</span>
+  <md-toolbar *ngIf="burndown">
+    <button md-mini-fab (click)="previousBurndown()" color="primary">
+        <md-icon style="vertical-align:middle">chevron_left</md-icon>
+    </button>
+    <span style="margin: 10px">{{burndown?.startDate }} to {{burndown?.endDate }}</span>
+    <button md-mini-fab (click)="nextBurndown()" color="primary">
+      <md-icon style="vertical-align:middle">chevron_right</md-icon>
+    </button>
+  </md-toolbar>
+</span>
 <md-list>
   <md-list-item *ngFor="let tx of burndown?.actualTx">
     <h3 md-line>
