@@ -47,6 +47,7 @@ export class BurndownComponent {
     updateChart(): void {
         this.options = {
           title : { text : null },
+          credits:  false,
           series: [{
             type: 'line',
             name: 'Actual',

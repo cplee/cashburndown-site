@@ -16,18 +16,22 @@
   </md-toolbar>
 </span>
 
-<chart [options]="options"></chart>
+<div style="float:left; width: 60%">
+  <chart [options]="options"></chart>
+</div>
+<div style="float:left; width: 40%; height: 400px; overflow: scroll">
+  <md-list>
+    <md-list-item *ngFor="let tx of burndown?.actualTx">
+      <h3 md-line>
+        <span>{{ tx.date }}</span>
+      </h3>
+      <p md-line>
+        <b>{{tx.name}}</b> {{tx.amount}}
+      </p>
+    </md-list-item>
+  </md-list>
+</div>
 
-<md-list>
-  <md-list-item *ngFor="let tx of burndown?.actualTx">
-    <h3 md-line>
-      <span>{{ tx.date }}</span>
-    </h3>
-    <p md-line>
-      <b>{{tx.name}}</b> {{tx.amount}}
-    </p>
-  </md-list-item>
-</md-list>
 
 <pre>
   {{burndown | json}}
